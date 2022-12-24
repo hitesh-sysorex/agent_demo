@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "504937939511",
+    "project_id": "ezpay-ef048",
+    "storage_bucket": "ezpay-ef048.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504937939511:android:c9ead7fa4eae687d4df5b2",
+        "android_client_info": {
+          "package_name": "com.example.agent_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504937939511-6umf6gm3m461sncra0plm1rt5064vpku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy1fDJQFiorIQbiDPtnykq73Hrd0JQpIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504937939511-6umf6gm3m461sncra0plm1rt5064vpku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504937939511:android:c369485ca2610e1c4df5b2",
+        "android_client_info": {
+          "package_name": "com.technosquare.EZpay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504937939511-6umf6gm3m461sncra0plm1rt5064vpku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBy1fDJQFiorIQbiDPtnykq73Hrd0JQpIM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504937939511-6umf6gm3m461sncra0plm1rt5064vpku.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
