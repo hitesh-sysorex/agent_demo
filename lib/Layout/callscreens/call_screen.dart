@@ -183,6 +183,11 @@ class _CallScreenState extends State<CallScreen> {
     await rtcEngine.initialize(RtcEngineContext(appId: appId));
     rtcEngine.enableVideo();
     rtcEngine.startPreview();
+    await rtcEngine.joinChannel(
+        token: tempToken,
+        channelId: channel,
+        uid: 0,
+        options: const ChannelMediaOptions());
     rtcEngine.registerEventHandler(
       RtcEngineEventHandler(
         onJoinChannelSuccess: (connection, elapsed) {
@@ -209,11 +214,11 @@ class _CallScreenState extends State<CallScreen> {
         },
       ),
     );
-    await rtcEngine.joinChannel(
-        token: tempToken,
-        channelId: channel,
-        uid: 0,
-        options: const ChannelMediaOptions());
+    // await rtcEngine.joinChannel(
+    //     token: tempToken,
+    //     channelId: channel,
+    //     uid: 0,
+    //     options: const ChannelMediaOptions());
   }
 
   /// Helper function to get list of native views
