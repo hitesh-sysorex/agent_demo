@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:agent_demo/Helper/call_methods.dart';
 import 'package:agent_demo/Models/call.dart';
 import 'package:agent_demo/Shared/Components/constant.dart';
-import 'package:agent_demo/configs/agora_configs.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -29,41 +28,50 @@ class _CallScreenState extends State<CallScreen> {
   // UserProvider userProvider;
   StreamSubscription? callStreamSubscription;
 
-  static final _users = <int>[];
-  final _infoStrings = <String>[];
-  bool muted = false;
+  // static final _users = <int>[];
+  // final _infoStrings = <String>[];
+  // bool muted = false;
 
   @override
   void initState() {
-    super.initState();
-    // rtcEngine = createAgoraRtcEngine();
+    print('init called');
+
+    rtcEngine = createAgoraRtcEngine();
     // rtcEngine.initialize(RtcEngineContext(
     //     appId: appId,
     //     channelProfile: ChannelProfileType.channelProfileCommunication));
-    addPostFrameCallback();
     initAgora();
+    addPostFrameCallback();
+    // callinitagora();
+    super.initState();
+
     // initializeAgora();
   }
 
-  Future<void> initializeAgora() async {
-    if (APP_ID.isEmpty) {
-      setState(() {
-        _infoStrings.add(
-          'APP_ID missing, please provide your APP_ID in settings.dart',
-        );
-        _infoStrings.add('Agora Engine is not starting');
-      });
-      return;
-    }
+  // callinitagora() async {
+  //   debugPrint('teri ma ka');
+  //   await initAgora();
+  // }
 
-    // await _initAgoraRtcEngine();
-    // initAgora();
-    // _addAgoraEventHandlers();
-    // await AgoraRtcEngine.enableWebSdkInteroperability(true);
-    // await AgoraRtcEngine.setParameters(
-    //     '''{"che.video.lowBitRateStreamParameter":{"width":320,"height":180,"frameRate":15,"bitRate":140}}''');
-    // await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
-  }
+  // Future<void> initializeAgora() async {
+  //   if (APP_ID.isEmpty) {
+  //     setState(() {
+  //       _infoStrings.add(
+  //         'APP_ID missing, please provide your APP_ID in settings.dart',
+  //       );
+  //       _infoStrings.add('Agora Engine is not starting');
+  //     });
+  //     return;
+  //   }
+
+  // await _initAgoraRtcEngine();
+  // initAgora();
+  // _addAgoraEventHandlers();
+  // await AgoraRtcEngine.enableWebSdkInteroperability(true);
+  // await AgoraRtcEngine.setParameters(
+  //     '''{"che.video.lowBitRateStreamParameter":{"width":320,"height":180,"frameRate":15,"bitRate":140}}''');
+  // await AgoraRtcEngine.joinChannel(null, widget.call.channelId, null, 0);
+  // }
 
   addPostFrameCallback() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -183,11 +191,15 @@ class _CallScreenState extends State<CallScreen> {
   // }
 
   Future<void> initAgora() async {
+    debugPrint('Permission asked');
+
     await [Permission.microphone, Permission.camera].request();
-    rtcEngine = createAgoraRtcEngine();
+    // rtcEngine = createAgoraRtcEngine();
+    debugPrint('Permission set');
     await rtcEngine.initialize(RtcEngineContext(
         appId: appId,
         channelProfile: ChannelProfileType.channelProfileCommunication));
+    debugPrint('initialize done');
 
     rtcEngine.registerEventHandler(
       RtcEngineEventHandler(
@@ -216,12 +228,17 @@ class _CallScreenState extends State<CallScreen> {
       ),
     );
     await rtcEngine.enableVideo();
+    debugPrint('Video enabled');
+
     await rtcEngine.startPreview();
+    debugPrint('Video Preview');
+
     await rtcEngine.joinChannel(
         token: tempToken,
         channelId: channel,
-        uid: 0,
+        uid: 123,
         options: const ChannelMediaOptions());
+    debugPrint('Channel Joined');
 
     // await rtcEngine.joinChannel(
     //     token: tempToken,
@@ -409,7 +426,7 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void dispose() {
     // clear users
-    _users.clear();
+    // _users.clear();
     // destroy sdk
     rtcEngine.leaveChannel();
 
