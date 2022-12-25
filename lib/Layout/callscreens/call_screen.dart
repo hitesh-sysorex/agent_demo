@@ -25,7 +25,7 @@ class _CallScreenState extends State<CallScreen> {
   final CallMethods callMethods = CallMethods();
   int remoteUID = 0;
   bool localUserJoined = false;
-  late final RtcEngine rtcEngine;
+  late RtcEngine rtcEngine;
   // UserProvider userProvider;
   StreamSubscription? callStreamSubscription;
 
@@ -180,14 +180,10 @@ class _CallScreenState extends State<CallScreen> {
   initAgora() async {
     await [Permission.microphone, Permission.camera].request();
     rtcEngine = createAgoraRtcEngine();
-    await rtcEngine.initialize(RtcEngineContext(appId: appId));
-    rtcEngine.enableVideo();
-    rtcEngine.startPreview();
-    await rtcEngine.joinChannel(
-        token: tempToken,
-        channelId: channel,
-        uid: 0,
-        options: const ChannelMediaOptions());
+    await rtcEngine.initialize(RtcEngineContext(
+        appId: appId,
+        channelProfile: ChannelProfileType.channelProfileCommunication));
+
     rtcEngine.registerEventHandler(
       RtcEngineEventHandler(
         onJoinChannelSuccess: (connection, elapsed) {
@@ -214,6 +210,14 @@ class _CallScreenState extends State<CallScreen> {
         },
       ),
     );
+    await rtcEngine.enableVideo();
+    await rtcEngine.startPreview();
+    await rtcEngine.joinChannel(
+        token: tempToken,
+        channelId: channel,
+        uid: 0,
+        options: const ChannelMediaOptions());
+
     // await rtcEngine.joinChannel(
     //     token: tempToken,
     //     channelId: channel,
