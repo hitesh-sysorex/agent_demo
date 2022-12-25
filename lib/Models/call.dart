@@ -33,7 +33,7 @@ class Call {
     return callMap;
   }
 
-  Call.fromMap(Map callMap) {
+  Call.fromMap(Map<String, dynamic> callMap) {
     callerId = callMap["caller_id"];
     callerName = callMap["caller_name"];
     callerPic = callMap["caller_pic"];

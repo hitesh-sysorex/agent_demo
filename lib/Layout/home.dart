@@ -14,11 +14,11 @@ class Home extends GetWidget<HomePageViewModel> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
-        stream: callMethods.callStream(uid: '124'),
+        stream: callMethods.callStream(uid: '123'),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data!.data() != null) {
             Call call =
-                Call.fromMap(snapshot.data!.data as Map<dynamic, dynamic>);
+                Call.fromMap(snapshot.data!.data() as Map<String, dynamic>);
 
             if (!call.hasDialled!) {
               return PickupScreen(call: call);

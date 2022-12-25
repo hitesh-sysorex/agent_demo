@@ -25,7 +25,7 @@ class _CallScreenState extends State<CallScreen> {
   final CallMethods callMethods = CallMethods();
   int remoteUID = 0;
   bool localUserJoined = false;
-  late RtcEngine rtcEngine;
+  late final RtcEngine rtcEngine;
   // UserProvider userProvider;
   StreamSubscription? callStreamSubscription;
 
@@ -182,6 +182,7 @@ class _CallScreenState extends State<CallScreen> {
     rtcEngine = createAgoraRtcEngine();
     await rtcEngine.initialize(RtcEngineContext(appId: appId));
     rtcEngine.enableVideo();
+    rtcEngine.startPreview();
     rtcEngine.registerEventHandler(
       RtcEngineEventHandler(
         onJoinChannelSuccess: (connection, elapsed) {
