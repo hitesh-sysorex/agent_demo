@@ -36,8 +36,13 @@ class _CallScreenState extends State<CallScreen> {
   @override
   void initState() {
     super.initState();
+    // rtcEngine = createAgoraRtcEngine();
+    // rtcEngine.initialize(RtcEngineContext(
+    //     appId: appId,
+    //     channelProfile: ChannelProfileType.channelProfileCommunication));
     addPostFrameCallback();
-    initializeAgora();
+    initAgora();
+    // initializeAgora();
   }
 
   Future<void> initializeAgora() async {
@@ -52,7 +57,7 @@ class _CallScreenState extends State<CallScreen> {
     }
 
     // await _initAgoraRtcEngine();
-    initAgora();
+    // initAgora();
     // _addAgoraEventHandlers();
     // await AgoraRtcEngine.enableWebSdkInteroperability(true);
     // await AgoraRtcEngine.setParameters(
@@ -177,7 +182,7 @@ class _CallScreenState extends State<CallScreen> {
   //   };
   // }
 
-  initAgora() async {
+  Future<void> initAgora() async {
     await [Permission.microphone, Permission.camera].request();
     rtcEngine = createAgoraRtcEngine();
     await rtcEngine.initialize(RtcEngineContext(
