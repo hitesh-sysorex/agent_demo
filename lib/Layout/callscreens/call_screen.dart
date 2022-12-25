@@ -36,7 +36,7 @@ class _CallScreenState extends State<CallScreen> {
   void initState() {
     print('init called');
 
-    rtcEngine = createAgoraRtcEngine();
+    // rtcEngine = createAgoraRtcEngine();
     // rtcEngine.initialize(RtcEngineContext(
     //     appId: appId,
     //     channelProfile: ChannelProfileType.channelProfileCommunication));
@@ -194,7 +194,7 @@ class _CallScreenState extends State<CallScreen> {
     debugPrint('Permission asked');
 
     await [Permission.microphone, Permission.camera].request();
-    // rtcEngine = createAgoraRtcEngine();
+    rtcEngine = createAgoraRtcEngine();
     debugPrint('Permission set');
     await rtcEngine.initialize(RtcEngineContext(
         appId: appId,
