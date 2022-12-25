@@ -52,7 +52,7 @@ class _CallScreenState extends State<CallScreen> {
     }
 
     // await _initAgoraRtcEngine();
-    await initAgora();
+    initAgora();
     // _addAgoraEventHandlers();
     // await AgoraRtcEngine.enableWebSdkInteroperability(true);
     // await AgoraRtcEngine.setParameters(
@@ -399,6 +399,7 @@ class _CallScreenState extends State<CallScreen> {
     rtcEngine.leaveChannel();
 
     rtcEngine.disableVideo();
+    rtcEngine.release();
     callStreamSubscription!.cancel();
     super.dispose();
   }
@@ -449,6 +450,7 @@ class _CallScreenState extends State<CallScreen> {
                   callMethods.endCall(
                     call: widget.call,
                   );
+                  Navigator.pop(context);
                 },
                 icon: const Icon(
                   Icons.call_end,
