@@ -57,7 +57,7 @@ class _PickupScreenState extends State<PickupScreen> {
                 fontSize: 30,
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 30),
             Image.network(
               widget.call.callerPic!,
               // isRound: true,
