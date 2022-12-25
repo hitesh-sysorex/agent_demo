@@ -1,9 +1,8 @@
-import 'dart:math';
-
 import 'package:agent_demo/Helper/call_methods.dart';
 import 'package:agent_demo/Layout/callscreens/call_screen.dart';
 import 'package:agent_demo/Models/call.dart';
 import 'package:agent_demo/Models/user.dart';
+import 'package:agent_demo/Shared/Components/constant.dart';
 import 'package:flutter/material.dart';
 
 class CallUtils {
@@ -17,7 +16,8 @@ class CallUtils {
       receiverId: to!.uid,
       receiverName: to.name,
       receiverPic: to.profilePhoto,
-      channelId: Random().nextInt(1000).toString(),
+      // channelId: Random().nextInt(1000).toString(),
+      channelId: channel,
     );
 
     // Log log = Log(
