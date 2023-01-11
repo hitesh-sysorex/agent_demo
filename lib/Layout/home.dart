@@ -1,8 +1,6 @@
 import 'package:agent_demo/Helper/call_methods.dart';
 import 'package:agent_demo/Layout/callscreens/pickup/pickup_screen.dart';
 import 'package:agent_demo/Models/call.dart';
-import 'package:agent_demo/Modules/videoCall.dart';
-import 'package:agent_demo/Utils/call_utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/Material.dart';
 import 'package:get/get.dart';
@@ -14,7 +12,7 @@ class Home extends GetWidget<HomePageViewModel> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<DocumentSnapshot>(
-        stream: callMethods.callStream(uid: '123'),
+        stream: callMethods.callStream(uid: '124'),
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data!.data() != null) {
             Call call =
@@ -44,7 +42,7 @@ class Home extends GetWidget<HomePageViewModel> {
                         IconButton(
                           icon: const Icon(Icons.video_call),
                           onPressed: () {
-                            Get.to(() => const VideoCall());
+                            // Get.to(() => const VideoCall());
                           },
                         ),
                         IconButton(
@@ -52,11 +50,11 @@ class Home extends GetWidget<HomePageViewModel> {
                             onPressed: () async {
                               // await [Permission.microphone, Permission.camera]
                               //         .request();
-                              CallUtils.dial(
-                                from: controller.sender,
-                                to: controller.receiver,
-                                context: context,
-                              );
+                              // CallUtils.dial(
+                              //   from: controller.sender,
+                              //   to: controller.receiver,
+                              //   context: context,
+                              // );
                             })
                       ],
                     )

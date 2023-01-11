@@ -7,6 +7,7 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CallScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _CallScreenState extends State<CallScreen> {
   void initState() {
     print('init called');
 
-    rtcEngine = createAgoraRtcEngine();
+    // rtcEngine = createAgoraRtcEngine();
     // rtcEngine.initialize(RtcEngineContext(
     //     appId: appId,
     //     channelProfile: ChannelProfileType.channelProfileCommunication));
@@ -79,7 +80,7 @@ class _CallScreenState extends State<CallScreen> {
 
       callStreamSubscription = callMethods
           // .callStream(uid: userProvider.getUser.uid)
-          .callStream(uid: '123')
+          .callStream(uid: '124')
           .listen((DocumentSnapshot ds) {
         // defining the logic
         if (ds.data == null) {
@@ -192,9 +193,13 @@ class _CallScreenState extends State<CallScreen> {
 
   Future<void> initAgora() async {
     debugPrint('Permission asked');
+    final pref = GetStorage();
+    String? tempToken = pref.read("tempToken");
+    String? channel = pref.read("channelName");
+    String? appId = pref.read("appID");
 
     await [Permission.microphone, Permission.camera].request();
-    // rtcEngine = createAgoraRtcEngine();
+    rtcEngine = createAgoraRtcEngine();
     debugPrint('Permission set');
     await rtcEngine.initialize(RtcEngineContext(
         appId: appId,
@@ -234,9 +239,9 @@ class _CallScreenState extends State<CallScreen> {
     debugPrint('Video Preview');
 
     await rtcEngine.joinChannel(
-        token: tempToken,
-        channelId: channel,
-        uid: 123,
+        token: tempToken!,
+        channelId: channel!,
+        uid: 124,
         options: const ChannelMediaOptions());
     debugPrint('Channel Joined');
 
